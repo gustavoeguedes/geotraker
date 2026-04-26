@@ -1,0 +1,22 @@
+meta {
+  name: Edit veiculo
+  type: http
+  seq: 5
+}
+
+put {
+  url: http://localhost:8080/veiculos/a9985985-dd6b-4b11-a1f3-cde1fd1d856d
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "modelo": "bandeirantes"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

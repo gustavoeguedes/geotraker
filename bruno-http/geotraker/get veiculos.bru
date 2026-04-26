@@ -1,0 +1,31 @@
+meta {
+  name: get veiculos
+  type: http
+  seq: 6
+}
+
+get {
+  url: http://localhost:8080/veiculos?page=0&pageSize=1
+  body: none
+  auth: inherit
+}
+
+params:query {
+  page: 0
+  pageSize: 1
+}
+
+body:json {
+  {
+    "modelo": "corolla",
+    "marca": "toyota",
+    "ano": 2026,
+    "cor": "preto",
+    "placa": "XXX-0000"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
