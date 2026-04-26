@@ -1,0 +1,26 @@
+meta {
+  name: Create veiculo
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8080/veiculos
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "modelo": "corolla",
+    "marca": "toyota",
+    "ano": 2026,
+    "cor": "preto",
+    "placa": "XXI-0000"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

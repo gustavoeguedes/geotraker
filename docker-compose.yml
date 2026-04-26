@@ -1,0 +1,14 @@
+services:
+  db:
+    image: postgres:18
+    container_name: geotracker-postgres
+    environment:
+      POSTGRES_USER: geotracker
+      POSTGRES_PASSWORD: geotracker
+      POSTGRES_DB: geotrackerdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql
+volumes:
+  db-data:

@@ -1,0 +1,26 @@
+meta {
+  name: get veiculo by placa
+  type: http
+  seq: 4
+}
+
+get {
+  url: http://localhost:8080/veiculos/placa/XXX-0000
+  body: none
+  auth: inherit
+}
+
+body:json {
+  {
+    "modelo": "corolla",
+    "marca": "toyota",
+    "ano": 2026,
+    "cor": "preto",
+    "placa": "XXX-0000"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
