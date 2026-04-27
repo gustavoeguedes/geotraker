@@ -23,7 +23,7 @@ Projeto de estudo de geolocalização utilizando Spring Boot e GeoTools.
 - [x] RF012 - Calcular tempo de deslocamento entre pontos
 
 ### Monitoramento
-- [ ] RF013 - Definir cercas geográficas (geofences)
+- [x] RF013 - Definir cercas geográficas (geofences)
 - [ ] RF014 - Notificar quando veículo entra em geofence
 - [ ] RF015 - Notificar quando veículo sai de geofence
 - [ ] RF016 - Visualizar veículo no mapa em tempo real
