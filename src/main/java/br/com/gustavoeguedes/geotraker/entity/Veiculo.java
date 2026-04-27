@@ -2,6 +2,7 @@ package br.com.gustavoeguedes.geotraker.entity;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -26,6 +27,15 @@ public class Veiculo {
 
     @Column(name = "cor", nullable = false)
     private String cor;
+
+    @Column(name = "ultima_latitude")
+    private Double ultimaLatitude;
+
+    @Column(name = "ultima_longitude")
+    private Double ultimaLongitude;
+
+    @Column(name = "ultima_posicao_data_hora")
+    private LocalDateTime ultimaPosicaoDataHora;
 
 
     public Veiculo() {
@@ -86,5 +96,29 @@ public class Veiculo {
 
     public void setCor(String cor) {
         this.cor = cor;
+    }
+
+    public Double getUltimaLatitude() {
+        return ultimaLatitude;
+    }
+
+    public void setUltimaLatitude(Double ultimaLatitude) {
+        this.ultimaLatitude = ultimaLatitude;
+    }
+
+    public Double getUltimaLongitude() {
+        return ultimaLongitude;
+    }
+
+    public void setUltimaLongitude(Double ultimaLongitude) {
+        this.ultimaLongitude = ultimaLongitude;
+    }
+
+    public LocalDateTime getUltimaPosicaoDataHora() {
+        return ultimaPosicaoDataHora;
+    }
+
+    public void setUltimaPosicaoDataHora(LocalDateTime ultimaPosicaoDataHora) {
+        this.ultimaPosicaoDataHora = ultimaPosicaoDataHora;
     }
 }

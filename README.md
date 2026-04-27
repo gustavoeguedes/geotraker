@@ -16,7 +16,7 @@ Projeto de estudo de geolocalização utilizando Spring Boot e GeoTools.
 
 ### Gestão de Posição (Geolocalização)
 - [x] RF007 - Registrar posição atual do veículo (latitude, longitude)
-- [ ] RF008 - Atualizar posição do veículo em tempo real
+- [x] RF008 - Atualizar posição do veículo em tempo real
 - [x] RF009 - Consultar histórico de posições do veículo
 - [x] RF010 - Visualizar trajetória do veículo em período
 - [x] RF011 - Calcular distância percorrida pelo veículo
@@ -24,8 +24,8 @@ Projeto de estudo de geolocalização utilizando Spring Boot e GeoTools.
 
 ### Monitoramento
 - [x] RF013 - Definir cercas geográficas (geofences)
-- [ ] RF014 - Notificar quando veículo entra em geofence
-- [ ] RF015 - Notificar quando veículo sai de geofence
+- [x] RF014 - Notificar quando veículo entra em geofence
+- [x] RF015 - Notificar quando veículo sai de geofence
 - [ ] RF016 - Visualizar veículo no mapa em tempo real
 
 ### Relatórios

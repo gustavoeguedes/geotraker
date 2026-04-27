@@ -2,6 +2,7 @@ package br.com.gustavoeguedes.geotraker.controller;
 
 import br.com.gustavoeguedes.geotraker.controller.dto.ApiResponse;
 import br.com.gustavoeguedes.geotraker.controller.dto.CreatePosicaoDto;
+import br.com.gustavoeguedes.geotraker.controller.dto.EditPosicaoDto;
 import br.com.gustavoeguedes.geotraker.controller.dto.PosicaoDto;
 import br.com.gustavoeguedes.geotraker.service.PosicaoService;
 import jakarta.validation.Valid;
@@ -28,6 +29,11 @@ public class PosicaoController {
         var posicaoEntity = posicaoService.registerPosicao(dto,veiculoId);
         var uri = URI.create("/veiculos/" + posicaoEntity.getVeiculo().getId() + "/posicoes/" + posicaoEntity.getId());
         return ResponseEntity.created(uri).build();
+    }
+
+    @PutMapping("/{veiculoId}/posicao")
+    public ResponseEntity<PosicaoDto> atualizarPosicao(@PathVariable UUID veiculoId, @RequestBody @Valid EditPosicaoDto dto) {
+        return ResponseEntity.ok(posicaoService.atualizarPosicao(veiculoId, dto));
     }
 
     @GetMapping("/{veiculoId}/posicoes")

@@ -2,9 +2,11 @@ package br.com.gustavoeguedes.geotraker.service;
 
 import br.com.gustavoeguedes.geotraker.controller.dto.CreatePosicaoDto;
 import br.com.gustavoeguedes.geotraker.controller.dto.DateRange;
+import br.com.gustavoeguedes.geotraker.controller.dto.EditPosicaoDto;
 import br.com.gustavoeguedes.geotraker.controller.dto.PosicaoDto;
 import br.com.gustavoeguedes.geotraker.exception.InvalidDateRangeException;
 import br.com.gustavoeguedes.geotraker.entity.PosicaoVeiculo;
+import br.com.gustavoeguedes.geotraker.entity.Veiculo;
 import br.com.gustavoeguedes.geotraker.exception.ResourceNotFoundException;
 import br.com.gustavoeguedes.geotraker.repository.PosicaoVeiculoRepository;
 import br.com.gustavoeguedes.geotraker.repository.VeiculoRepository;
@@ -14,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -25,15 +28,18 @@ public class PosicaoService {
     private final VeiculoRepository veiculoRepository;
     private final GeoService geoService;
     private final VeiculoService veiculoService;
+    private final MonitoramentoService monitoramentoService;
 
     public PosicaoService(PosicaoVeiculoRepository posicaoVeiculoRepository,
                           VeiculoRepository veiculoRepository,
                           GeoService geoService,
-                          VeiculoService veiculoService) {
+                          VeiculoService veiculoService,
+                          MonitoramentoService monitoramentoService) {
         this.posicaoVeiculoRepository = posicaoVeiculoRepository;
         this.veiculoRepository = veiculoRepository;
         this.geoService = geoService;
         this.veiculoService = veiculoService;
+        this.monitoramentoService = monitoramentoService;
     }
 
     public PosicaoVeiculo registerPosicao(CreatePosicaoDto dto, UUID veiculoId) {
@@ -52,6 +58,39 @@ public class PosicaoService {
         }
 
         return posicaoVeiculoRepository.save(posicaoEntity);
+    }
+
+    public PosicaoDto atualizarPosicao(UUID veiculoId, EditPosicaoDto dto) {
+        var veiculo = veiculoRepository.findById(veiculoId)
+                .orElseThrow(() -> new ResourceNotFoundException("Veículo não encontrado com id: " + veiculoId));
+
+        LocalDateTime dataHora = dto.dataHora() != null ? dto.dataHora() : LocalDateTime.now();
+
+        if (dto.latitude() != null) {
+            veiculo.setUltimaLatitude(dto.latitude().doubleValue());
+        }
+
+        if (dto.longitude() != null) {
+            veiculo.setUltimaLongitude(dto.longitude().doubleValue());
+        }
+
+        if (dto.latitude() != null || dto.longitude() != null) {
+            veiculo.setUltimaPosicaoDataHora(dataHora);
+            veiculoRepository.save(veiculo);
+
+            PosicaoVeiculo posicaoEntity = new PosicaoVeiculo();
+            posicaoEntity.setVeiculo(veiculo);
+            posicaoEntity.setLatitude(veiculo.getUltimaLatitude() != null ? BigDecimal.valueOf(veiculo.getUltimaLatitude()) : null);
+            posicaoEntity.setLongitude(veiculo.getUltimaLongitude() != null ? BigDecimal.valueOf(veiculo.getUltimaLongitude()) : null);
+            posicaoEntity.setDataHora(dataHora);
+            posicaoVeiculoRepository.save(posicaoEntity);
+
+            monitoramentoService.verificarPosicao(veiculoId);
+
+            return PosicaoDto.fromEntity(posicaoEntity);
+        }
+
+        return null;
     }
 
     public Page<PosicaoDto> getHistorico(UUID veiculoId, LocalDateTime inicio, LocalDateTime fim, Integer page, Integer pageSize) {
