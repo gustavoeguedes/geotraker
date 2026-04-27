@@ -24,11 +24,13 @@ public class VeiculoService {
 
     public Veiculo create(CreateVeiculoDto dto) {
         veiculoRepository.findByPlaca(dto.placa())
-                .ifPresent(_ -> {
-                    throw new VeiculoExistsException("Veículo com placa " + dto.placa() + " já existe.");
+                .ifPresent(veiculo -> {
+                    throw new VeiculoExistsException(
+                            "Veículo com placa " + dto.placa() + " já existe."
+                    );
                 });
 
-        var veiculoEntity = new Veiculo();
+        Veiculo veiculoEntity = new Veiculo();
 
         veiculoEntity.setAno(dto.ano());
         veiculoEntity.setCor(dto.cor());
@@ -59,7 +61,7 @@ public class VeiculoService {
 
         if (dto.placa() != null && !dto.placa().equals(veiculoEntity.getPlaca())) {
             veiculoRepository.findByPlaca(dto.placa())
-                    .ifPresent(_ -> {
+                    .ifPresent(veiculo -> {
                         throw new VeiculoExistsException("Veículo com placa " + dto.placa() + " já existe.");
                     });
             veiculoEntity.setPlaca(dto.placa());
@@ -89,5 +91,12 @@ public class VeiculoService {
         var pageable = PageRequest.of(page, size);
         return veiculoRepository.findAll(pageable)
                 .map(VeiculoDto::fromEntity);
+    }
+
+    public void veiculoExitsById(UUID veiculoId) {
+        var veiculoExists = veiculoRepository.existsById(veiculoId);
+        if (!veiculoExists) {
+            throw new ResourceNotFoundException("Veículo não encontrado com id: " + veiculoId);
+        }
     }
 }

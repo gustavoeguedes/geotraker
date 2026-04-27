@@ -1,0 +1,30 @@
+meta {
+  name: historico posicao veiculo
+  type: http
+  seq: 7
+}
+
+get {
+  url: http://localhost:8080/veiculos/fcab0e81-6389-4be0-9eb6-b9e935bf49ae/posicoes?page&size&dataInicio&dataFim
+  body: none
+  auth: inherit
+}
+
+params:query {
+  page: 
+  size: 
+  dataInicio: 
+  dataFim: 
+}
+
+body:json {
+  {
+    "longitude": 180,
+    "latitude": 90
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

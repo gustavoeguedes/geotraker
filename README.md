@@ -15,12 +15,12 @@ Projeto de estudo de geolocalização utilizando Spring Boot e GeoTools.
 - [x] RF006 - Buscar veículo por ID
 
 ### Gestão de Posição (Geolocalização)
-- [ ] RF007 - Registrar posição atual do veículo (latitude, longitude)
+- [x] RF007 - Registrar posição atual do veículo (latitude, longitude)
 - [ ] RF008 - Atualizar posição do veículo em tempo real
-- [ ] RF009 - Consultar histórico de posições do veículo
-- [ ] RF010 - Visualizar trajetória do veículo em período
-- [ ] RF011 - Calcular distância percorrida pelo veículo
-- [ ] RF012 - Calcular tempo de deslocamento entre pontos
+- [x] RF009 - Consultar histórico de posições do veículo
+- [x] RF010 - Visualizar trajetória do veículo em período
+- [x] RF011 - Calcular distância percorrida pelo veículo
+- [x] RF012 - Calcular tempo de deslocamento entre pontos
 
 ### Monitoramento
 - [ ] RF013 - Definir cercas geográficas (geofences)
@@ -69,7 +69,7 @@ Projeto de estudo de geolocalização utilizando Spring Boot e GeoTools.
 - [x] RN004 - Ano do veículo não pode ser anterior a 1900
 
 ### Geolocalização
-- [ ] RN005 - Coordenadas devem ser válidas (latitude -90 a 90, longitude -180 a 180)
+- [x] RN005 - Coordenadas devem ser válidas (latitude -90 a 90, longitude -180 a 180)
 - [ ] RN006 - Histórico de posições deve persistir por no mínimo 30 dias
 - [ ] RN007 - Geofence deve ter no mínimo 3 pontos
 - [ ] RN008 - Geofence deve ser um polígono válido (fechado)

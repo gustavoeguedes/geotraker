@@ -27,6 +27,7 @@ public class Veiculo {
     @Column(name = "cor", nullable = false)
     private String cor;
 
+
     public Veiculo() {
     }
 

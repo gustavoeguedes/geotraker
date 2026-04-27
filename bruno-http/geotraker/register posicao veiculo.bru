@@ -1,0 +1,23 @@
+meta {
+  name: register posicao veiculo
+  type: http
+  seq: 5
+}
+
+post {
+  url: http://localhost:8080/veiculos/fcab0e81-6389-4be0-9eb6-b9e935bf49ae/posicoes
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "longitude": 150,
+    "latitude": -55
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
